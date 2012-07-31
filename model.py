@@ -145,6 +145,9 @@ def L1(x):
 def nll(o,y):
     return -T.mean(T.log(o)[T.arange(y.shape[0]),y]+T.sum(T.log(1-o), axis=1)-T.log(1-o)[T.arange(y.shape[0]),y])
 
+def hardmax(o,y):
+    return T.mean(T.eq(T.argmax(o,axis=1),y))
+
 def nlls(o,y):
     return -T.mean( (T.log(o)[T.arange(y.shape[0]),y]+T.sum(T.log(1-o), axis=1)-T.log(1-o)[T.arange(y.shape[0]),y]) * T.neq(y,-1))
 
