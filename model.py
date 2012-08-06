@@ -28,7 +28,6 @@ def find_last_epoch(path):
 
 class logistic(object):
     def __init__(self,i_size,h_size, W = None, b = None, c = None):
-        """                                                                                                                                                                             h_size : number of hidden units                                                                                                                                                 e_size : embedding size                                                                                                                                                         p_size : patch size (input size)                                                                                                                                                """
 
         self.h_size = h_size
         self.i_size = i_size

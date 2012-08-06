@@ -6,12 +6,11 @@ import time
 import theano
 import numpy
 import scipy.io
-import scikits.learn.svm
-import scikits.learn.linear_model
+import sklearn.svm
+import sklearn.linear_model
 
 
 from dataset.DatasetInterfaces import root
-from dataset.load_all import get_dataset
 from os.path import join
 
 import pdb
@@ -158,35 +157,7 @@ def eval_fold(nsteps, dataset):
 
 
 if __name__ == '__main__':
-    # paths de Xav * LAYER 1*
-    # caeh 1000 normal: /data/lisatmp/mullerx/exp/svhn/mullerx_db/svhn_pt_caeh_0000/1/params   (9.12% en ft)
-    # caeh 1000 binomial /data/lisatmp/mullerx/exp/svhn/mullerx_db/svhn_pt_caeh_0001/1/params (9.26% en ft)
-    # cae  1000 /data/lisatmp/mullerx/exp/svhn/mullerx_db/svhn_pt_cae_0000/8/params (9.1% en ft)
-   
-    # paths de Xav * LAYER 2 *
-    # cae l2 /data/lisatmp/mullerx/exp/svhn/mullerx_db/svhn_pt_l2_cae_0000/30/params (7.62% en ft
-    
-    #data = get_dataset('icml12')
-    #data = get_dataset('icml12_ranks')
-    #data = get_dataset('icml12_transfer')
-    #data = get_dataset('icml12_sampling')
-    #data = 'inv_fsvhn_caeh1_normal'
-    #data = 'inv_fsvhn_cae1'
-    #path = '/data/lisatmp/mesnilgr/datasets/MIT_Indoor/MIT_Indoor/npy/'
-    #dic = 'rootpcatrain_rot0_comp5__files_dict.pkl'
-
-    #data = root('/scratch/rifaisal/data/paradata/msrparaphrasefullconv_files_dict.pkl')
-    #data = root('/scratch/rifaisal/data/paradata/msrparaphrasefullconvnol1_files_dict.pkl')
-    #data = root('/scratch/rifaisal/data/paradata/msrparaphrasefullconvl2_files_dict.pkl')
-    data = root('/scratch/rifaisal/data/paradata/msrparaphrasefullconv4096_files_dict.pkl')
-    #x = data.get_train_labeled(shared_array=False)[0]
-    #mean = x.mean(0)
-    #std = x.std(0)
-
-    #def scale(X,l):
-    #    return (X-mean)/std
-
-    #data = root('/scratch/rifaisal/data/paradata/msrparaphrasefullconvl2_files_dict.pkl',prepro_fct_x=[(scale,[])])
+    data = root('/scratch/rifaisal/data/paradata/msrparaphrasefullconvl2_files_dict.pkl',prepro_fct_x=[(scale,[])])
     print 'Starting evaluation...'
     eval_fold(nsteps=30, dataset = data)
     print dic
