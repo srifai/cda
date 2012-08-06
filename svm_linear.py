@@ -46,7 +46,7 @@ def OptimizeLinearSVM(datasets, MAXSTEPS=10, verbose=1):
         steps+=1
         if Ccurrent not in C_to_allstats:
             # Compute the validation statistics for the current C
-            model = scikits.learn.svm.LinearSVC(C=Ccurrent)
+            model = sklearn.svm.LinearSVC(C=Ccurrent)
             model.fit(train_set_x, train_set_y)
             train = compute_score(model, train_set_x, train_set_y)
             valid = compute_score(model, valid_set_x, valid_set_y)
@@ -57,7 +57,7 @@ def OptimizeLinearSVM(datasets, MAXSTEPS=10, verbose=1):
 
         if Cnew not in C_to_allstats:
             # Compute the validation statistics for the next C
-            model = scikits.learn.svm.LinearSVC(C=Cnew)
+            model = sklearn.svm.LinearSVC(C=Cnew)
             model.fit(train_set_x, train_set_y)
             train = compute_score(model, train_set_x, train_set_y)
             valid = compute_score(model, valid_set_x, valid_set_y)

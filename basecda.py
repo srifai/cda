@@ -87,8 +87,8 @@ class experiment(object):
 
         optimize = theano.function([k],self.costs,updates=updates,givens = { self.x:self.shared_x[k:k+1],
                                                                              self.y:self.shared_y[k:k+1] })
-        self.jobman.state['valid_emotion'] = 0
-        self.jobman.state['valid_identity'] = 0 
+        self.jobman.state['valid_discriminant'] = 0
+        self.jobman.state['valid_nuisance'] = 0 
         self.jobman.state['valid_both'] = 0
         print '--- Training'
         sys.stdout.flush()
@@ -96,8 +96,8 @@ class experiment(object):
         costs = []
 
         h = self.cae.get_hidden(self.x)
-        h_d = h[:self.featsplit]
-        h_o = h[self.featsplit:]
+        h_d = h[:,:self.featsplit]
+        h_o = h[:,self.featsplit:]
 
         for i in range(self.jobman.state['epochs']):
             costs = []
@@ -189,8 +189,8 @@ def jobman_entrypoint(state, channel):
     return 0
 
 if __name__ == "__main__":
-    HP_init = [ ('values','dataset',['/Users/rifaisal/data/mnistds/mnistvanilla_files_dict.pkl']),
-                ('values','evalfreq',[5]),
+    HP_init = [ ('values','dataset',['/scratch/rifaisal/data/mnistds/mnistvanilla_files_dict.pkl']),
+                ('values','evalfreq',[1]),
                 ('values','freq',[2000]),
                 ('values','model',[None]),
                 ('values','nclass',[10]),
@@ -201,7 +201,7 @@ if __name__ == "__main__":
                 ('values','disc',[.1]),
                 ('values','bs',[1]),
                 ('values','epochs',[600]),
-                ('values','n_h',[10]),
+                ('values','n_h',[500]),
                 ('values','featsplit',[.5]),
                 ('values','l1d',[.00001,.000001]),
                 ('values','l1o',[.00001,.000001]),
